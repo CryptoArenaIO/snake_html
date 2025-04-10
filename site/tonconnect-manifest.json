@@ -1,5 +1,17 @@
 {
   "name": "Telegram Wallet",
   "url": "https://queengame.io",  
-  "iconUrl": "https://queengame.io/images/logo.jpg"
+  "iconUrl": "https://queengame.io/images/logo.jpg",
+  "wallets": [
+    {
+      "type": "ton",
+      "name": "Tonkeeper",
+      "iconUrl": "https://queengame.io/images/logo.jpg"
+    },
+    {
+      "type": "ton",
+      "name": "Telegram Wallet",
+      "iconUrl": "https://queengame.io/images/logo.jpg"
+    }
+  ]
 }
