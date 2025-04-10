@@ -651,19 +651,38 @@ function Comm1() {
       return _ref.apply(this, arguments);
     };
   }();
-  var handleSendTx = /*#__PURE__*/function () {
+  var handleDisconnect = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
+            _context2.next = 2;
+            return tonConnectUI.disconnect();
+          case 2:
+            setAddress(''); // 清空状态
+          case 3:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function handleDisconnect() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var handleSendTx = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
             if (address) {
-              _context2.next = 3;
+              _context3.next = 3;
               break;
             }
             alert('请先连接钱包');
-            return _context2.abrupt("return");
+            return _context3.abrupt("return");
           case 3:
-            _context2.next = 5;
+            _context3.next = 5;
             return tonConnectUI.sendTransaction({
               validUntil: Math.floor(Date.now() / 1000) + 60,
               messages: [{
@@ -674,12 +693,12 @@ function Comm1() {
             });
           case 5:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
-      }, _callee2);
+      }, _callee3);
     }));
     return function handleSendTx() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/react.createElement(comm1_CustomStyle, null, "home1", /*#__PURE__*/react.createElement("div", {
@@ -688,7 +707,9 @@ function Comm1() {
     }
   }, /*#__PURE__*/react.createElement("h1", null, "Telegram Wallet \u63A5\u5165 Demo"), /*#__PURE__*/react.createElement("button", {
     onClick: handleConnect
-  }, "\u8FDE\u63A5\u94B1\u5305"), address && /*#__PURE__*/react.createElement("p", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)));
+  }, "\u8FDE\u63A5\u94B1\u5305"), /*#__PURE__*/react.createElement("button", {
+    onClick: handleDisconnect
+  }, "\u65AD\u5F00\u8FDE\u63A5"), address && /*#__PURE__*/react.createElement("p", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)));
 }
 /* harmony default export */ const comm1 = (Comm1);
 ;// CONCATENATED MODULE: ./public/images/footer_bg.png
