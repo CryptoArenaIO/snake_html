@@ -591,6 +591,9 @@ function _isMobile() {
   var flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
   return flag;
 }
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__(9669);
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 // EXTERNAL MODULE: ./node_modules/.store/@tonconnect+ui@2.1.0/node_modules/@tonconnect/ui/lib/index.mjs + 2 modules
 var lib = __webpack_require__(4047);
 ;// CONCATENATED MODULE: ./src/components/index/comm1.jsx
@@ -618,14 +621,22 @@ function comm1_taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = stri
 
 
 
+
 var comm1_CustomStyle = styled_components_browser_esm/* default */.ZP.div(comm1_templateObject || (comm1_templateObject = comm1_taggedTemplateLiteralLoose(["\n\tmargin-top: 200px;\n"])));
 var tonConnectUI = new lib/* TonConnectUI */.HF({
   manifestUrl: 'https://queengame.io/tonconnect-manifest.json'
 });
+var RPC_URL = 'https://main.ton.dev/jsonRPC';
 function Comm1() {
   var _useState = (0,react.useState)(''),
     address = _useState[0],
     setAddress = _useState[1];
+  var _useState2 = (0,react.useState)(0),
+    tonBalance = _useState2[0],
+    setTonBalance = _useState2[1];
+  var _useState3 = (0,react.useState)(0),
+    usdtBalance = _useState3[0],
+    setUsdtBalance = _useState3[1];
   (0,react.useEffect)(function () {
     tonConnectUI.onStatusChange(function (walletInfo) {
       console.log("walletInfo===>", walletInfo);
@@ -670,8 +681,20 @@ function Comm1() {
       return _ref2.apply(this, arguments);
     };
   }();
+  var jettonTransferBody = function jettonTransferBody(_ref3) {
+    var to = _ref3.to,
+      amount = _ref3.amount,
+      responseAddress = _ref3.responseAddress,
+      payload = _ref3.payload;
+    return {
+      to: to,
+      amount: amount,
+      responseAddress: responseAddress,
+      payload: payload
+    };
+  };
   var handleSendTx = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
@@ -686,9 +709,16 @@ function Comm1() {
             return tonConnectUI.sendTransaction({
               validUntil: Math.floor(Date.now() / 1000) + 60,
               messages: [{
-                address: address,
-                // 给自己打测试币
-                amount: '10000000' // 0.01 TON
+                address: 'EQCIcPVVv3dXUXmF1xymWlqFDCABcb2ql1P_FQhuGqKjMYTh',
+                // USDT合约地址
+                amount: '100000',
+                // 0.1 USDT (6 decimals)
+                payload: jettonTransferBody({
+                  to: 'UOCIJ8NVZ1h2KGRVy9YtD44Y0IyUTu37s2t6kDua8rU0ThPx',
+                  amount: '100000',
+                  responseAddress: address,
+                  payload: ''
+                })
               }]
             });
           case 5:
@@ -698,10 +728,81 @@ function Comm1() {
       }, _callee3);
     }));
     return function handleSendTx() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/react.createElement(comm1_CustomStyle, null, "home1", /*#__PURE__*/react.createElement("div", {
+
+  // 查询 TON 余额
+  var fetchTonBalance = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(walletAddress) {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return axios_default().post(RPC_URL, {
+              method: 'getBalance',
+              params: [walletAddress]
+            });
+          case 3:
+            response = _context4.sent;
+            return _context4.abrupt("return", response.data.result);
+          case 7:
+            _context4.prev = 7;
+            _context4.t0 = _context4["catch"](0);
+            console.error('查询 TON 余额时出错:', _context4.t0);
+            return _context4.abrupt("return", 0);
+          case 11:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[0, 7]]);
+    }));
+    return function fetchTonBalance(_x) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+  (0,react.useEffect)(function () {
+    if (!address) return;
+    var fetchBalances = /*#__PURE__*/function () {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var ton;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              console.log('111');
+              // 查询 TON 余额
+              _context5.next = 4;
+              return fetchTonBalance(address);
+            case 4:
+              ton = _context5.sent;
+              console.log("ton===>", ton);
+              setTonBalance(ton / 1e9); // nanoTON 转换为 TON
+
+              // 查询 USDT 余额
+              // const usdt = await fetchUsdtBalance(walletAddress);
+              // setUsdtBalance(usdt / 1e9);  // nanoTON 转换为 TON
+              _context5.next = 12;
+              break;
+            case 9:
+              _context5.prev = 9;
+              _context5.t0 = _context5["catch"](0);
+              console.error('查询余额时发生错误:', _context5.t0);
+            case 12:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5, null, [[0, 9]]);
+      }));
+      return function fetchBalances() {
+        return _ref6.apply(this, arguments);
+      };
+    }();
+    fetchBalances();
+  }, [address]);
+  return /*#__PURE__*/react.createElement(comm1_CustomStyle, null, /*#__PURE__*/react.createElement("div", {
     style: {
       padding: 20
     }
@@ -709,7 +810,9 @@ function Comm1() {
     onClick: handleConnect
   }, "\u8FDE\u63A5\u94B1\u5305"), /*#__PURE__*/react.createElement("button", {
     onClick: handleDisconnect
-  }, "\u65AD\u5F00\u8FDE\u63A5"), address && /*#__PURE__*/react.createElement("p", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)));
+  }, "\u65AD\u5F00\u8FDE\u63A5"), /*#__PURE__*/react.createElement("div", null, address && /*#__PURE__*/react.createElement("div", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)), /*#__PURE__*/react.createElement("p", null), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("p", null, "TON\u4F59\u989D: ", tonBalance, " TON")), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("button", {
+    onClick: handleSendTx
+  }, "\u8F6C\u8D26 0.1 USDT"))));
 }
 /* harmony default export */ const comm1 = (Comm1);
 ;// CONCATENATED MODULE: ./public/images/footer_bg.png
@@ -817,7 +920,7 @@ function Game() {
   }, /*#__PURE__*/react.createElement("div", {
     className: "games_pro"
   }, /*#__PURE__*/react.createElement("iframe", {
-    src: "https://card.moohoy.com/html5/battle/snake/webSeverTest1/web/index.html?debug=1&log=10000&address=halou",
+    src: "http://snake.queengame.io",
     width: "1223px",
     height: "694px",
     scrolling: "no",
@@ -1252,7 +1355,7 @@ module.exports = JSON.parse('{"Connect Wallet":"連接錢包","HOME":"首頁","M
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [10], () => (__webpack_require__(2580)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [226], () => (__webpack_require__(2580)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
