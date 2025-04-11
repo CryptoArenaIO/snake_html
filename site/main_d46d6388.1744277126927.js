@@ -920,7 +920,7 @@ function Game() {
   }, /*#__PURE__*/react.createElement("div", {
     className: "games_pro"
   }, /*#__PURE__*/react.createElement("iframe", {
-    src: "http://snake.queengame.io",
+    src: "https://snake.queengame.io",
     width: "1223px",
     height: "694px",
     scrolling: "no",
