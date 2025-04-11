@@ -695,6 +695,7 @@ function Comm1() {
   };
   var handleSendTx = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var usdtContractAddress, recipientAddress, amount;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
@@ -705,27 +706,45 @@ function Comm1() {
             alert('请先连接钱包');
             return _context3.abrupt("return");
           case 3:
-            _context3.next = 5;
+            _context3.prev = 3;
+            // USDT 合约地址
+            usdtContractAddress = 'EQCIcPVVv3dXUXmF1xymWlqFDCABcb2ql1P_FQhuGqKjMYTh'; // 收款人地址 或 合约地址
+            recipientAddress = 'UOCIJ8NVZ1h2KGRVy9YtD44Y0IyUTu37s2t6kDua8rU0ThPx'; // 转账数量：0.1 USDT (6 位小数)
+            amount = '100000';
+            _context3.next = 9;
             return tonConnectUI.sendTransaction({
               validUntil: Math.floor(Date.now() / 1000) + 60,
+              // 设置交易的有效期为 60 秒
               messages: [{
-                address: 'EQCIcPVVv3dXUXmF1xymWlqFDCABcb2ql1P_FQhuGqKjMYTh',
-                // USDT合约地址
-                amount: '100000',
-                // 0.1 USDT (6 decimals)
+                address: usdtContractAddress,
+                // USDT 合约地址
+                amount: amount,
+                // 发送的 USDT 数量
                 payload: jettonTransferBody({
-                  to: 'UOCIJ8NVZ1h2KGRVy9YtD44Y0IyUTu37s2t6kDua8rU0ThPx',
-                  amount: '100000',
+                  to: recipientAddress,
+                  // 收款人地址 或 合约地址
+                  amount: amount,
+                  // 转账的金额
                   responseAddress: address,
-                  payload: ''
+                  // 响应地址
+                  payload: '' // 可选的附加数据
                 })
               }]
             });
-          case 5:
+          case 9:
+            alert('转账成功');
+            _context3.next = 16;
+            break;
+          case 12:
+            _context3.prev = 12;
+            _context3.t0 = _context3["catch"](3);
+            console.error('转账失败:', _context3.t0);
+            alert('转账失败');
+          case 16:
           case "end":
             return _context3.stop();
         }
-      }, _callee3);
+      }, _callee3, null, [[3, 12]]);
     }));
     return function handleSendTx() {
       return _ref4.apply(this, arguments);
@@ -767,34 +786,27 @@ function Comm1() {
     if (!address) return;
     var fetchBalances = /*#__PURE__*/function () {
       var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        var ton;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              _context5.prev = 0;
-              console.log('111');
-              // 查询 TON 余额
-              _context5.next = 4;
-              return fetchTonBalance(address);
-            case 4:
-              ton = _context5.sent;
-              console.log("ton===>", ton);
-              setTonBalance(ton / 1e9); // nanoTON 转换为 TON
+              try {
+                // console.log('111')
+                // // 查询 TON 余额
+                // const ton = await fetchTonBalance(address);
+                // console.log("ton===>", ton)
+                // setTonBalance(ton / 1e9);  // nanoTON 转换为 TON
 
-              // 查询 USDT 余额
-              // const usdt = await fetchUsdtBalance(walletAddress);
-              // setUsdtBalance(usdt / 1e9);  // nanoTON 转换为 TON
-              _context5.next = 12;
-              break;
-            case 9:
-              _context5.prev = 9;
-              _context5.t0 = _context5["catch"](0);
-              console.error('查询余额时发生错误:', _context5.t0);
-            case 12:
+                // 查询 USDT 余额
+                // const usdt = await fetchUsdtBalance(walletAddress);
+                // setUsdtBalance(usdt / 1e9);  // nanoTON 转换为 TON
+              } catch (err) {
+                console.error('查询余额时发生错误:', err);
+              }
+            case 1:
             case "end":
               return _context5.stop();
           }
-        }, _callee5, null, [[0, 9]]);
+        }, _callee5);
       }));
       return function fetchBalances() {
         return _ref6.apply(this, arguments);
@@ -810,7 +822,7 @@ function Comm1() {
     onClick: handleConnect
   }, "\u8FDE\u63A5\u94B1\u5305"), /*#__PURE__*/react.createElement("button", {
     onClick: handleDisconnect
-  }, "\u65AD\u5F00\u8FDE\u63A5"), /*#__PURE__*/react.createElement("div", null, address && /*#__PURE__*/react.createElement("div", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)), /*#__PURE__*/react.createElement("p", null), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("p", null, "TON\u4F59\u989D: ", tonBalance, " TON")), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("button", {
+  }, "\u65AD\u5F00\u8FDE\u63A5"), /*#__PURE__*/react.createElement("div", null, address && /*#__PURE__*/react.createElement("div", null, "\u5DF2\u8FDE\u63A5\u94B1\u5305\u5730\u5740: ", address)), /*#__PURE__*/react.createElement("p", null), /*#__PURE__*/react.createElement("div", null), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("button", {
     onClick: handleSendTx
   }, "\u8F6C\u8D26 0.1 USDT"))));
 }
@@ -920,7 +932,7 @@ function Game() {
   }, /*#__PURE__*/react.createElement("div", {
     className: "games_pro"
   }, /*#__PURE__*/react.createElement("iframe", {
-    src: "http://snake.queengame.io",
+    src: "https://snake.queengame.io",
     width: "1223px",
     height: "694px",
     scrolling: "no",
