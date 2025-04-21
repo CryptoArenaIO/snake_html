@@ -897,26 +897,13 @@ function main_taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strin
 
 
 
-var main_CustomStyle = styled_components_browser_esm/* default */.ZP.div(main_templateObject || (main_templateObject = main_taggedTemplateLiteralLoose(["\n\twidth: 100%;\n\tmin-height: 100vh;\n\tbackground: url(", ") no-repeat;\n\tbackground-size: 100%;\n\n\t.header_container {\n\t\tdisplay: flex;\n\t\ttransition: all 0.3s ease 0s;\n\t\tbackground-repeat: no-repeat;\n\t\tbackground-size: cover;\n\t\tbackground-position: center center;\n\t\tposition: absolute;\n\t\ttop: 50px;\n\t\tleft: 50%;\n\t\ttransform: translateX(-50%);\n\t\twidth: 95%;\n\t\theight: 80px;\n\t\tz-index: 99;\n\t\tpadding: 30px 30px 38px;\n\t\tflex-direction: row;\n\t\t-webkit-box-pack: justify;\n\t\tjustify-content: space-between;\n\t\t-webkit-box-align: center;\n\t\talign-items: center;\n\t}\n\t.header_left {\n\t\tdisplay: flex;\n\t\tflex-direction: row;\n\t\t-webkit-box-align: center;\n\t\talign-items: center;\n\t\tgap: 56px;\n\t\ta {\n\t\t\tcolor: #fff;\n\t\t}\n\t}\n\t.header_logo {\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\timg {\n\t\t\twidth: 200px;\n\t\t\tmargin-top: 30px;\n\t\t}\n\t}\n\t.games_conter {\n\t\tpadding-top: 200px;\n\t\tpadding-bottom: 50px;\n\t}\n\t.games_pro {\n\t\twidth: 1256px;\n\t\theight: 728px;\n\t\tbackground: url(", ") no-repeat;\n\t\tbackground-size: 100%;\n\t\tmargin: auto;\n\t\ttext-align: center;\n\t\t// display: flex;\n\t\t// justify-content: center;\n\t\t// align-items: center;\n\t}\n\n\n\t@media (max-width: 1700px) {\n\t\t.header_logo {\n\t\t\timg {\n\t\t\t\twidth: 200px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t}\n\t}\n\n\n\t@media (max-width: 1650px) {\n\t\t.header_container {\n\t\t\twidth: 100%;\n\t\t\tmin-width: 1200px;\n\t\t\tpadding: 10px;\n\t\t}\n\t\t.header_left {\n\t\t\tgap: 20px;\n\t\t}\n\t}\n\n\n\t@media (max-width: 1400px) {\n\t\t.header_left {\n\t\t\tgap: 0px;\n\t\t}\n\t}\n\n"])), game_bj_namespaceObject, games_kuang_namespaceObject);
+var main_CustomStyle = styled_components_browser_esm/* default */.ZP.div(main_templateObject || (main_templateObject = main_taggedTemplateLiteralLoose(["\n\twidth: 100%;\n\tmin-height: 100vh;\n\tbackground: url(", ") no-repeat;\n\t// background-size: 100%;\n\n\t.header_container {\n\t\tdisplay: flex;\n\t\ttransition: all 0.3s ease 0s;\n\t\tbackground-repeat: no-repeat;\n\t\tbackground-size: cover;\n\t\tbackground-position: center center;\n\t\tposition: absolute;\n\t\ttop: 50px;\n\t\tleft: 50%;\n\t\ttransform: translateX(-50%);\n\t\twidth: 95%;\n\t\theight: 80px;\n\t\tz-index: 99;\n\t\tpadding: 30px 30px 38px;\n\t\tflex-direction: row;\n\t\t-webkit-box-pack: justify;\n\t\tjustify-content: space-between;\n\t\t-webkit-box-align: center;\n\t\talign-items: center;\n\t}\n\t.header_left {\n\t\tdisplay: flex;\n\t\tflex-direction: row;\n\t\t-webkit-box-align: center;\n\t\talign-items: center;\n\t\tgap: 56px;\n\t\ta {\n\t\t\tcolor: #fff;\n\t\t}\n\t}\n\t.header_logo {\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\timg {\n\t\t\twidth: 200px;\n\t\t\tmargin-top: 30px;\n\t\t}\n\t}\n\t.games_conter {\n\t\t// padding-top: 200px;\n\t\t// padding-bottom: 50px;\n\t}\n\t.games_pro {\n\t\twidth: 1256px;\n\t\theight: 728px;\n\t\tbackground: url(", ") no-repeat;\n\t\tbackground-size: 100%;\n\t\tmargin: auto;\n\t\ttext-align: center;\n\t\tposition: absolute;\n\t\tleft: 50%;\n\t\ttop: 50%;\n\t\tmargin-left: -628px;\n\t\tmargin-top: -364px;\n\t}\n\n\n\t@media (max-width: 1700px) {\n\t\t.header_logo {\n\t\t\timg {\n\t\t\t\twidth: 200px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t}\n\t}\n\n\n\t@media (max-width: 1650px) {\n\t\t.header_container {\n\t\t\twidth: 100%;\n\t\t\tmin-width: 1200px;\n\t\t\tpadding: 10px;\n\t\t}\n\t\t.header_left {\n\t\t\tgap: 20px;\n\t\t}\n\t}\n\n\n\t@media (max-width: 1400px) {\n\t\t.header_left {\n\t\t\tgap: 0px;\n\t\t}\n\t}\n\n"])), game_bj_namespaceObject, games_kuang_namespaceObject);
 function Game() {
   // 使用鼠标移动事件触发函数
   var handleMouseOver = function handleMouseOver() {
     document.getElementById('myIframe').contentWindow.focus();
   };
   return /*#__PURE__*/react.createElement(main_CustomStyle, null, /*#__PURE__*/react.createElement("div", {
-    className: "cryptobit_nav_manu"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "header_container"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "header_left"
-  }, /*#__PURE__*/react.createElement(dist/* NavLink */.OL, {
-    to: "/"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "header_logo"
-  }, /*#__PURE__*/react.createElement("img", {
-    src: logo_namespaceObject,
-    alt: ""
-  })))))), /*#__PURE__*/react.createElement("div", {
     className: "d-md-block d-lg-none"
   }, /*#__PURE__*/react.createElement("div", {
     className: "mean_conter"
